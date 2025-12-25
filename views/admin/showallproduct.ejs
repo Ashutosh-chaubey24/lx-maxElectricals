@@ -1,0 +1,314 @@
+<% layout('./boilerplate/boilerplate.ejs') %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<style>
+    :root{
+      --bg:#f7f8fb;         /* page background */
+      --card:#ffffff;        /* cards/panels */
+      --text:#0f172a;        /* primary text */
+      --muted:#6b7280;       /* secondary text */
+      --line:#e5e7eb;        /* borders */
+      --primary:#2563eb;     /* accent */
+      --primary-weak:#e6efff;/* light accent back */
+      --danger:#ef4444;      /* delete */
+      --ok:#10b981;          /* success */
+      --warn:#f59e0b;        /* warning */
+      --radius:16px;
+      --shadow:0 6px 20px rgba(2,6,23,.07);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text); background:var(--bg);
+    }
+
+    /* Layout */
+    .layout{display:grid; grid-template-columns: 260px 1fr; min-height:100vh}
+    /* Mobile: hide sidebar by default, reveal with checkbox */
+    #navToggle{display:none}
+    aside{
+      background:#fff; border-right:1px solid var(--line);
+      padding:20px; position:sticky; top:0; height:100vh; overflow:auto;
+    }
+    .brand{display:flex; align-items:center; gap:10px; margin-bottom:28px}
+    .brand-logo{
+      width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,var(--primary),#60a5fa);
+      display:grid; place-items:center; color:#fff; font-weight:800; box-shadow:var(--shadow);
+    }
+    .brand-name{font-weight:800; letter-spacing:.4px}
+
+    nav a{
+      display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; text-decoration:none; color:var(--text);
+      border:1px solid transparent; transition:.2s ease;
+    }
+    nav a:hover{background:var(--bg); border-color:var(--line)}
+    nav a.active{background:var(--primary-weak); color:var(--primary); border-color:#c7d7ff}
+    nav .group{display:grid; gap:6px}
+    .nav-label{margin:18px 0 8px; font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.12em}
+
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:18px 22px; position:sticky; top:0; z-index:5; background:var(--bg); border-bottom:1px solid var(--line);
+    }
+    .left-head{display:flex; align-items:center; gap:12px}
+    .mobile-only{display:none}
+    .search{display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line); padding:10px 12px; border-radius:12px; min-width:260px}
+    .search input{border:none; outline:none; width:220px}
+    .user{display:flex; align-items:center; gap:12px}
+    .avatar{width:36px; height:36px; border-radius:50%; background:#dbeafe; display:grid; place-items:center; color:var(--primary); font-weight:700}
+
+    main{padding:24px; display:grid; gap:24px}
+
+    .cards{display:grid; grid-template-columns: repeat(12, 1fr); gap:20px}
+    .panel{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .panel header{position:unset; border:0; background:transparent; padding:16px 18px}
+    .panel .body{padding:18px}
+
+    /* Add Product form */
+    .form-grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:14px}
+    .field{display:grid; gap:8px}
+    .field label{font-size:.9rem; color:var(--muted)}
+    .field input,.field select,.field textarea{
+      width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--line); background:#fff; outline: none;
+    }
+    .field textarea{min-height:100px; resize:vertical}
+    .col-6{grid-column: span 6}
+    .col-4{grid-column: span 4}
+    .col-3{grid-column: span 3}
+    .col-12{grid-column: span 12}
+
+    .actions{display:flex; gap:10px; justify-content:flex-end; margin-top:10px}
+    .btn{appearance:none; border:none; padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600; border:1px solid transparent}
+    .btn.primary{background:var(--primary); color:#fff}
+    .btn.ghost{background:#fff; border-color:var(--line)}
+    .btn.danger{background:var(--danger); color:#fff}
+
+    /* Products table */
+    .table{width:100%; border-collapse:collapse}
+    .table th,.table td{padding:14px; border-bottom:1px solid var(--line); text-align:left}
+    .table th{font-size:.85rem; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.06em}
+    .product{
+      display:flex; align-items:center; gap:12px
+    }
+    .thumb{width:44px; height:44px; border-radius:12px; object-fit:cover; border:1px solid var(--line)}
+    .badge{padding:6px 10px; border-radius:999px; font-size:.76rem; border:1px solid var(--line); background:#fff}
+    .badge.ok{border-color:#c7f3e6; background:#ecfdf5; color:#065f46}
+    .badge.low{border-color:#fde68a; background:#fffbeb; color:#92400e}
+
+    .row-actions{display:flex; gap:8px}
+    .link{padding:8px 10px; border-radius:10px; text-decoration:none; border:1px solid var(--line); color:var(--text)}
+    .link:hover{background:var(--bg)}
+    .link.edit{color:var(--primary); border-color:#c7d7ff}
+    .link.delete{color:var(--danger); border-color:#fecaca}
+
+    /* Modals (pure CSS :target) */
+    .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(15,23,42,.45); padding:20px}
+    .modal:target{display:grid}
+    .dialog{max-width:560px; width:100%; background:#fff; border-radius:18px; box-shadow:var(--shadow); border:1px solid var(--line)}
+    .dialog header{display:flex; justify-content:space-between; align-items:center}
+    .close{display:inline-block; padding:6px 10px; border-radius:10px; border:1px solid var(--line); text-decoration:none; color:var(--text)}
+
+    /* Responsive */
+    @media (max-width: 1000px){
+      .layout{grid-template-columns: 1fr}
+      aside{position:fixed; left:0; top:64px; height:calc(100vh - 64px); transform: translateX(-100%); transition:.25s ease; width:240px; z-index:30}
+      #navToggle:checked ~ aside{transform: translateX(0)}
+      header{position:sticky; top:0}
+      .mobile-only{display:initial}
+      .search{min-width:unset}
+    }
+    @media (max-width: 720px){
+      .cards{grid-template-columns: 1fr}
+      .col-6,.col-4,.col-3,.col-12{grid-column:1 / -1}
+      .table thead{display:none}
+      .table tr{display:grid; grid-template-columns: 1fr; gap:8px; padding:12px 0}
+      .table td{display:flex; justify-content:space-between; gap:20px; padding:8px 0; border-bottom:0}
+      .table td::before{content: attr(data-label); font-weight:600; color:var(--muted)}
+      .row-actions{justify-content:flex-end}
+    }
+    
+  </style>
+
+<!--  -->
+<body>
+   <section id="products" class="panel">
+          <header>
+            <h3 style="margin:0">All Products</h3>
+          </header>
+          <div class="body">
+            <table class="table" role="table" aria-label="All products">
+              <tbody>
+                <% for(let findproduct of findproducts){%>
+                <tr>
+                  <td data-label="Product">
+                    <div class="product">
+                      <img class="thumb" src="<%= findproduct.image %>"alt="LX Max Decorative Pole" />
+                      <div>
+                        <div style="font-weight:700"><%= findproduct.title%></div>
+                        <div style="color:var(--muted); font-size:.9rem"><%= findproduct.description %></div>
+                      </div>
+                    </div>
+                  </td>
+                  
+                  <td data-label="Status"><span class="badge ok">In Stock</span></td>
+                  <td data-label="Actions">
+                    <div class="row-actions">                         
+                     <button class="editBtn btn btn-primary"  data-id="<%= findproduct._id %>">Edit</button>
+                     <button class="deletebtn link delete" data-id="<%= findproduct._id %>">Delete</button>
+   
+                    </div>
+                  </td>
+                </tr>
+                <%}%>
+              </tbody>
+            </table>
+          </div>
+        </section>
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal">
+  <div class="dialog">
+    <header class="body">
+      <h3 style="margin:0">Edit Product</h3>
+      <a class="close" href="#">✕</a>
+    </header>
+
+    <div class="body">
+      <!-- Hidden product ID -->
+      <input type="hidden" id="edit_id">
+
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="edit_title">
+      </div>
+
+      <div class="field" style="margin-top:10px">
+        <label>Description</label>
+        <textarea id="edit_description"></textarea>
+      </div>
+     <img id="edit_img_prev" width="120" style="margin-bottom:10px;">
+<input type="file" id="edit_image">
+      <div class="actions">
+        <a class="btn ghost" href="#">Cancel</a>
+        <button class="btn primary" id="updateProductBtn">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <!-- DELETE CONFIRM MODALS -->
+        <div id="delete-1" class="modal .deletebtn">
+          <div class="dialog">
+            <header class="body">
+              <h3 style="margin:0">Delete Product</h3>
+              <a class="close" href="#">✕</a>
+            </header>
+            <div class="body">
+              <p>Are you sure you want to delete <strong>LX Max Decorative Pole</strong>? This action cannot be undone.</p>
+              <div class="actions">
+                <a class="btn ghost" href="#">Cancel</a>
+                <button class="btn danger modalDeletebtn">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- // data fatch and updates -->
+          <script>
+document.querySelectorAll(".editBtn").forEach(btn => {
+  btn.addEventListener("click", async () => {
+
+    let id = btn.dataset.id;
+    console.log("Editing Product ID:", id);
+
+    // Fetch product details
+    let res = await fetch(`/admin/edit/${id}`);
+    let data = await res.json();
+
+    // Fill modal
+    document.getElementById("edit_id").value = data._id;
+    document.getElementById("edit_title").value = data.title;
+    document.getElementById("edit_description").value = data.description;
+    document.getElementById("edit_img_prev").src= data.image;
+
+    // SHOW OLD IMAGE
+    document.getElementById("edit_img_prev").src = data.image;
+
+    // Open modal
+    window.location.href = "#editModal";
+  });
+});
+
+
+// ✔ UPDATE BUTTON → uploads image also
+document.getElementById("updateProductBtn").addEventListener("click", async () => {
+
+  let id = document.getElementById("edit_id").value;
+
+  // FormData for image upload
+  let formData = new FormData();
+  formData.append("title", document.getElementById("edit_title").value);
+  formData.append("description", document.getElementById("edit_description").value);
+
+  // Only append image if new file selected
+  let file = document.getElementById("edit_image").files[0];
+  if (file) {
+    formData.append("image", file);
+  }
+  let res = await fetch(`/admin/edit/${id}`, {
+  method: "PATCH",
+  body: formData,
+  credentials: "same-origin"
+});
+
+  if (res.ok) {
+    alert("Product Updated Successfully!");
+
+    // Close modal
+    window.location.hash = "";
+
+    setTimeout(() => {
+
+      window.location.reload();
+      window.location.hash = "";
+    }, 100);
+  }
+});
+</script>
+<script>
+  if (window.location.hash === "#editModal") {
+  window.location.hash = "";
+}
+</script>
+<!-- delete -->
+ <script>
+let deleteButtons = document.querySelectorAll(".deletebtn");
+let modalDeleteButton = document.querySelector(".modalDeletebtn");
+let selectedId = null;
+
+// open modal
+deleteButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedId = btn.dataset.id;
+    window.location.href = "#delete-1";
+  });
+});
+
+// delete confirmed
+modalDeleteButton.addEventListener("click", async () => {
+  let res = await fetch(`/admin/delete/${selectedId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    alert("Product deleted!");
+    window.location.hash = "";
+    window.location.reload();
+  } else {
+    alert("Failed to delete!");
+  }
+});
+
+ </script>
+</body>

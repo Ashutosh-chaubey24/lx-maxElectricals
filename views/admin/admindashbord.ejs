@@ -1,0 +1,144 @@
+<% layout('./boilerplate/boilerplate.ejs') %>
+
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<style>
+/* 🔴 Bootstrap reset ONLY for this section */
+#add, 
+#add * {
+  all: unset;
+  box-sizing: border-box;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Layout restore */
+#add {
+  display: block;
+}
+
+/* Form grid */
+#add .form-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+/* Columns */
+#add .col-6 { grid-column: span 6; }
+#add .col-4 { grid-column: span 4; }
+#add .col-3 { grid-column: span 3; }
+#add .col-12 { grid-column: span 12; }
+
+/* Fields */
+#add .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Inputs */
+#add input,
+#add textarea,
+#add select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Buttons */
+#add .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+#add .btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+#add .btn.primary {
+  background: #2563eb;
+  color: white;
+}
+
+#add .btn.ghost {
+  background: white;
+  border: 1px solid #ccc;
+}
+
+/* Header */
+#add header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Badge (notification) */
+#add .badge {
+  background: red;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+</style>
+<body>
+   <section id="add" class="panel">
+<h3 style="margin:0">All Products</h3>
+          <div class="body">
+             <h3 style="margin:0">All Products</h3>
+            <form action="/admin/add" method="POST" enctype="multipart/form-data">
+              <div class="form-grid">
+                <div class="field col-6">
+                  <label for="pname">Product Name</label>
+                  <input id="pname" type="text" name="title" placeholder="eg. Decorative Pole – LX Max" required />
+                </div>
+                <div class="field col-4">
+                  <label for="img">Image URL</label>
+                  <input id="img" type="file"  name="image"placeholder="https://…/image.jpg" />
+                </div>
+                <div class="field col-12">
+                  <label for="desc">Description</label>
+                  <textarea id="desc" name="description" placeholder="Short product details…"></textarea>
+                </div>
+                <div class="field col-6">
+                  <label for="desc">height</label>
+                 <input type="text"  name="height" placeholder="Enter height">
+                </div>
+                <div class="field col-3">
+                  <label for="desc">material</label>
+                 <input type="text"  name="material" placeholder="Enter material">
+                </div>
+              </div>
+              <div class="field col-3">
+                  <label>Category</label>
+<select name="category" required>
+  <option value="">Select Category</option>
+  <option value="street-lighting">Street Lighting</option>
+  <option value="decorative-poles">Decorative Light Poles</option>
+  <option value="custom-poles">Custom Poles</option>
+  <option value="bollard">Bollard</option>
+  <option value="traffic-poles">Traffic Poles</option>
+  <option value="high-mast">Heigh mast</option>
+  <option value="camera-poles">Camara Poles</option>
+  <option value="solar-poles">Soller Light Poles</option>
+</select>
+                </div>
+              </div>
+              <div class="actions">
+                <button class="btn ghost" type="reset">Reset</button>
+                <button class="btn primary" type="submit">Add Product</button>
+              </div>
+              
+            </form>
+          </div>
+        </section>
+

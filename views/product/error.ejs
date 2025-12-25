@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error | Something went wrong</title>
+
+  <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body{
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: #333;
+    }
+
+    .error-box{
+      background: #ffffff;
+      padding: 40px 35px;
+      border-radius: 14px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .error-code{
+      font-size: 64px;
+      font-weight: 700;
+      color: #dc3545;
+      margin-bottom: 10px;
+    }
+
+    .error-title{
+      font-size: 22px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .error-message{
+      font-size: 15px;
+      color: #6c757d;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn{
+      display: inline-block;
+      padding: 12px 26px;
+      background: #2563eb;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover{
+      background: #1e4ed8;
+      transform: translateY(-2px);
+    }
+
+    .small-text{
+      margin-top: 18px;
+      font-size: 13px;
+      color: #adb5bd;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="error-box">
+    <div class="error-code">
+      <%= err.status || 500 %>
+    </div>
+
+    <div class="error-title">
+      Oops! Something went wrong 😵
+    </div>
+
+    <div class="error-message">
+      <%= err.message || "An unexpected error occurred. Please try again later." %>
+    </div>
+
+    <a href="/" class="btn">
+      🔙 Back to Home
+    </a>
+
+    <div class="small-text">
+      If this problem persists, please contact support.
+    </div>
+  </div>
+
+</body>
+</html>

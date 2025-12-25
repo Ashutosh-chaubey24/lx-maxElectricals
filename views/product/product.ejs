@@ -1,0 +1,225 @@
+<% layout('./boilerplate/boilerplate2.ejs') %>
+<body>
+  <section class="products-section" id="products">
+    <div class="container">
+        <h1 class="section-title">Featured Products</h1>
+        <!-- Filters -->
+      <div class="filters">
+  <button class="filter-btn <%= category === 'all' ? 'active' : '' %>" data-filter="all">
+    All
+  </button>
+
+  <button class="filter-btn <%= category === 'street-lighting' ? 'active' : '' %>" data-filter="street-lighting">
+    Street Lighting
+  </button>
+
+  <button class="filter-btn <%= category === 'decorative-poles' ? 'active' : '' %>" data-filter="decorative-poles">
+    Decorative Light Poles
+  </button>
+
+  <button class="filter-btn <%= category === 'custom-poles' ? 'active' : '' %>" data-filter="custom-poles">
+    Custom Poles
+  </button>
+
+  <button class="filter-btn <%= category === 'bollard' ? 'active' : '' %>" data-filter="bollard">
+    Bollard
+  </button>
+
+  <button class="filter-btn <%= category === 'traffic-poles' ? 'active' : '' %>" data-filter="traffic-poles">
+    Traffic Poles
+  </button>
+
+  <button class="filter-btn <%= category === 'high-mast' ? 'active' : '' %>" data-filter="high-mast">
+    High Mast
+  </button>
+
+  <button class="filter-btn <%= category === 'camera-poles' ? 'active' : '' %>" data-filter="camera-poles">
+    Camera Poles
+  </button>
+
+  <button class="filter-btn <%= category === 'solar-poles' ? 'active' : '' %>" data-filter="solar-poles">
+    Solar Light Poles
+  </button>
+</div>
+
+
+        <!-- Product Grid -->
+        <div class="my-products">
+  <% if (hasProducts) { %>
+    <div class="product-grid">
+      <% for (let p of allproducts) { %>
+      <div class="product-card1">
+        <div class="product-image">
+          <a href="/showproductinfo/<%= p._id %>">
+          <img 
+  src="<%= p.image %>" 
+  alt="<%= p.title %> decorative light pole"
+  loading="lazy"
+></a>
+        </div>
+
+        <div class="product-info">
+         
+
+          <p class="product-category"><%= p.material %></p>
+
+          <div class="product-details">
+            <span><%= p.title %></span>
+            <div>Height <span><%= p.height %></span></div>
+          </div>
+          <div class="product-buttons">
+            <button class="cta-btn1 openModalBtn" data-id="<%= p._id %>">Get Quote</button>
+              <a style="text-decoration: none;" href="/showproductinfo/<%= p._id %>" class="cta-btn1 view-btn" >View</a>
+
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  <% } else { %>
+    <div style="text-align:center; margin:50px 0; font-size:24px; color:gray;">
+      Coming Soon!
+    </div>
+  <% } %>
+</div>
+
+    </div>
+</section>
+<!-- modal -->
+<div class="customModal" id="quoteModal">
+    <div class="modalBox">
+
+        <!-- LEFT SIDE: PRODUCT INFO -->
+        <div class="leftSection">
+            <h3 class="productTitle" id="title">Solar Street Light Pole</h3>
+
+            <div class="imgWrapper">
+                <img src="" id="img"alt="Product Image"  style="height: 400px; background-size: cover;" >
+            </div>
+            <p class="moq" id="height"></p>
+            <p class="moq" id="material"></p>
+        </div>
+
+        <!-- RIGHT SIDE: FORM -->
+        <div class="rightSection">
+            <h3 class="quoteTitle">Get a Quick Quote</h3>
+
+            <form class="quoteForm" method="post" action="/user/enquiry">
+               <input type="hidden" id="productid" name="productId">
+
+                
+                 <div class="formGroup">
+                    <label>Name</label>
+                    <input type="text" name="name" required placeholder="Enter Quantity">
+                </div>
+                 <div class="formGroup">
+                    <label>Email</label>
+                    <input type="email" name="email" required placeholder="Enter Quantity">
+                </div>
+                <div class="formGroup">
+                    <label>Quantity</label>
+                    <input type="number" name="Quantity" required placeholder="Enter Quantity">
+                </div>
+
+                <!-- <div class="formGroup">
+                    <label>Measurement Unit</label>
+                    <select>
+                        <option>Piece</option>
+                        <option>Meter</option>
+                        <option>Set</option>
+                    </select>
+                </div> -->
+
+                <div class="formGroup">
+                    <label>Mobile No.</label>
+                    <div class="mobileBox">
+                        <span class="flag">🇮🇳 +91</span>
+                        <input type="text" name="mobile" required placeholder="Enter Mobile Number">
+                    </div>
+                </div>
+                 <div class="formGroup">
+                  <label class="label" for="message">Message</label>
+                    
+                         
+          <textarea    name="requirementDeatail" class="field" placeholder="Tell us about your project or question..." required></textarea>
+                   
+                </div>
+
+                <button type="submit" class="submitBtn">Send Enquiry</button>
+            </form>
+        </div>
+
+        <!-- CLOSE -->
+        <span class="closeBtn">&times;</span>
+    </div>
+</div>
+            <script>
+    const modal = document.getElementById("quoteModal");
+    const openBtn = document.querySelectorAll(".openModalBtn");
+    const closeBtn = document.querySelector(".closeBtn");
+
+    // Open modal
+    openBtn.forEach( button =>{
+        button.addEventListener("click", async(btn) => {
+            console.log("btn was cliked")
+        modal.style.display = "flex";
+        console.log("hello btn was  clicked");
+        let id = button.dataset.id;
+        console.log(id)
+    console.log("Editing Product ID:", id);
+    // Fetch product details
+    let res = await fetch(`/showinfomodal/${id}`);
+    let data = await res.json();
+    console.log(data)
+    // fill modal
+    //  document.getElementById("edit_id").value = data._id;
+    document.getElementById("title").textContent = data.title;
+    document.getElementById("img").src = data.image;
+    document.getElementById("price").textContent = data.price;
+    document.getElementById("height").textContent= data.height;
+    document.getElementById("material").textContent = data.material;
+    document.getElementById("productid").value= data._id;
+
+    });
+    });
+    
+
+    // Close modal
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // Close by clicking outside
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+</script>
+<!-- filter -->
+ <script>
+  const buttons = document.querySelectorAll(".filter-btn");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const category = btn.getAttribute("data-filter");
+      window.location.href = `/product?category=${category}`;
+    });
+  });
+</script>
+
+</body>
+
+<!-- <script>
+  function gotlocation(possition){
+console.log(possition)
+  }
+  function failed(){
+    console.log("not get location")
+  }
+  const btn =document.querySelector("#get")
+  btn.addEventListener("click",async()=>{
+    console.log("ok")
+    navigator.geolocation.getCurrentPosition(gotlocation,failed)
+  })
+</script> -->

@@ -1,0 +1,238 @@
+/* Background */
+.customModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Box */
+.modalBox {
+    background: #fff;
+    width: 900px;
+    display: flex;
+    padding: 0;
+    border-radius: 10px;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Left: Image + Info */
+.leftSection {
+    width: 45%;
+    background: #f5f5f5;
+    padding: 20px;
+    border-right: 2px solid #ddd;
+}
+
+.leftSection .productTitle {
+    background: #4b4b4b;
+    color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.imgWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgWrapper img {
+    width: 90%;
+    border-radius: 6px;
+}
+
+/* Price & MOQ */
+.price, .moq {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.price span {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Right: Form */
+.rightSection {
+    width: 55%;
+    padding: 25px;
+}
+
+.quoteTitle {
+    background: #063b67;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+/* Form Elements */
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    font-weight: 600;
+}
+
+.formGroup input,
+.formGroup select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+}
+
+/* Mobile Flag + Input */
+.mobileBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mobileBox .flag {
+    background: #eee;
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+/* Submit Button */
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    background: #063b67;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submitBtn:hover {
+    background: #0c4e8f;
+}
+
+/* Close Button */
+.closeBtn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+/* show pages css */
+
+.product-container {
+    width: 90%;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+}
+
+.product-left {
+    width: 40%;
+}
+
+.image-box {
+    width: 100%;
+    height: 450px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f5f5;
+}
+
+.image-box img {
+    max-height: 400px;
+    width: auto;
+}
+
+.product-right {
+    width: 60%;
+}
+
+.product-right h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 24px;
+    color: #1d7a37;
+    margin-bottom: 0;
+}
+
+.moq {
+    color: gray;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 150px;
+}
+
+.btn-primary {
+    background: #153bb6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-outline {
+    padding: 10px 20px;
+    border: 1px solid #153bb6;
+    color: #153bb6;
+    cursor: pointer;
+    background: white;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.info-table th,
+.info-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.info-table th {
+    background: #f0f0f0;
+    width: 200px;
+}
+
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}

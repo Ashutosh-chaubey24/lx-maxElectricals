@@ -1,0 +1,28 @@
+<h2>All Enquiries</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mobile</th>
+      <th>Email</th>
+      <th>Quantity</th>
+      <th>Product</th>
+      <th>Message</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% allNotifications.forEach(n => { %>
+      <tr>
+        <td><%= n.name %></td>
+        <td><%= n.mobile %></td>
+        <td><%= n.email %></td>
+        <td><%= n.Quantity || "-" %></td>
+        <td><%= n.productId ? n.productId.name : "-" %></td>
+        <td><%= n.requirementDetail %></td>
+        <td><%= n.createdAt.toDateString() %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

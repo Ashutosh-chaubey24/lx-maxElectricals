@@ -1,0 +1,320 @@
+<% layout('./boilerplate/boilerplate2.ejs') %>
+  <style>
+    /* Base reset & variables */
+    :root{
+      --bg:#f6f7fb;
+      --card:#fff;
+      --muted:#6b7280;
+      --accent:#0f766e;
+      --accent-2:#083A78;
+      --radius:10px;
+      --container-max:1100px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:Inter, system-ui, Arial, sans-serif;
+      line-height:1.4;
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .container{
+      max-width:var(--container-max);
+      margin:28px auto;
+      padding:18px;
+    }
+
+    /* Main two-column card */
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      box-shadow:0 6px 20px rgba(16,24,40,0.06);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:22px;
+      padding:20px;
+      align-items:start;
+    }
+
+    /* Gallery section */
+    .gallery{display:flex;flex-direction:column;gap:12px}
+    .main-img{
+      width:100%;
+      aspect-ratio:4/4;
+      object-fit:contain;
+      border-radius:12px;
+      
+    }
+    .thumbs{
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      padding-bottom:6px;
+    }
+    .thumb{
+      width:64px;height:64px;border-radius:10px;cursor:pointer;object-fit:cover;
+      border:2px solid transparent;flex:0 0 auto;opacity:.95;
+    }
+    .thumb.active{border-color:var(--accent-2);opacity:1}
+
+    /* Info column */
+    .product-info{
+      padding:6px 0 0 0;
+      font-family:Inter, Arial;
+    }
+    .title{font-size:20px;font-weight:700;margin-bottom:6px;color:#0b3a7e}
+    .sku{color:var(--muted);font-size:13px;margin-bottom:8px}
+    .price-row{display:flex;align-items:baseline;gap:12px;margin:8px 0}
+    .price{font-size:24px;font-weight:800;color:var(--accent-2)}
+    .old-price{text-decoration:line-through;color:var(--muted);font-weight:600}
+
+    .spec-box{margin-top:16px;border-radius:8px;padding:10px;background:#fbfdff}
+    .spec-box div{display:flex;justify-content:space-between;padding:8px 4px;border-bottom:1px solid #eef2f6}
+    .spec-box div:last-child{border-bottom:0}
+    .spec-box span{color:var(--muted);font-size:14px}
+    .spec-box b{color:#111}
+
+    .more-link{display:inline-block;margin-top:10px;color:var(--accent-2);text-decoration:underline;font-size:14px}
+
+    .actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .btn{padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn.primary{background:var(--accent-2);color:#fff}
+    .btn.ghost{background:transparent;border:1px solid #e6e9ef;color:#111}
+
+    /* Enquiry / form wrapper (right) */
+    .wrapper{
+      width:100%;
+      background:var(--card);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 4px 18px rgba(16,24,40,0.04);
+    }
+    .wrapper h1{font-size:20px;margin-bottom:12px;color:#083475;text-align:left}
+    .enquiry-form .row{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+    .input-box{display:flex;flex-direction:column;width:100%}
+    .input-box label{font-weight:600;margin-bottom:6px;font-size:14px}
+    .input-box input, .input-box select, textarea{
+      width:100%;padding:10px;border:1px solid #e3e6ee;border-radius:8px;font-size:14px;outline:none
+    }
+    .input-box input:focus, textarea:focus, select:focus{box-shadow:0 0 0 3px rgba(8,58,120,0.06);border-color:var(--accent-2)}
+    .mobile-group{display:flex;gap:8px;align-items:center}
+    .mobile-group select{padding:10px;border-radius:8px;border:1px solid #e3e6ee}
+    .submit{width:100%;padding:12px;border-radius:10px;border:0;background:var(--accent-2);color:#fff;font-weight:700;cursor:pointer;margin-top:6px}
+
+    textarea{resize:vertical;min-height:84px}
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;margin-top:20px;
+    }
+    .product-card{
+      border:1px solid #edf2f7;padding:12px;background:#fff;border-radius:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;
+    }
+    .product-card img{width:100%;height:160px;object-fit:contain;border-radius:8px;background:#f8f8f8}
+    .product-card h3{font-size:15px;margin:6px 0;color:#083475}
+    .quote-btn{margin-top:auto;text-align:center;padding:10px;border-radius:8px;background:var(--accent-2);color:#fff;text-decoration:none;display:inline-block;font-weight:700}
+
+    /* Tabs */
+    .tabs{margin-top:16px;border-top:1px dashed #eef2f6;padding-top:12px}
+    .tab-buttons{display:flex;gap:8px;flex-wrap:wrap}
+    .tab-buttons button{background:transparent;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+    .tab-buttons button.active{background:#f3f7f6;border:1px solid #e6f0ec}
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:13px}
+    .center{text-align:center}
+
+    /* Responsive adjustments */
+    @media (max-width: 1100px){
+      .card{grid-template-columns:1fr 360px}
+      .product-grid{grid-template-columns:repeat(3,1fr)}
+    }
+
+    @media (max-width: 900px){
+      .card{grid-template-columns:1fr 320px;padding:16px;gap:16px}
+      .product-grid{grid-template-columns:repeat(2,1fr)}
+      .main-img{aspect-ratio:4/4;object-fit: contain;}
+      .product-card img{height:140px}
+    }
+
+    @media (max-width: 720px){
+      .card{grid-template-columns:1fr;padding:14px}
+      .wrapper{margin-top:18px}
+      .product-grid{grid-template-columns:1fr}
+      .thumb{width:56px;height:56px}
+      .product-card img{height:120px}
+      .title{font-size:18px}
+      .price{font-size:20px}
+      .submit{padding:14px}
+      .actions{flex-direction:column}
+      .btn{width:100%}
+    }
+
+    @media (max-width:420px){
+      .container{padding:12px;margin:12px auto}
+      .thumb{width:48px;height:48px;border-radius:8px}
+      .main-img{border-radius:10px}
+      .input-box label{font-size:13px}
+      .input-box input, textarea{font-size:14px}
+      .enquiry-form .row{flex-direction:column}
+      .mobile-group{width:100%}
+    }
+  </style>
+<body>
+  <div class="container">
+    <div class="card" role="main" aria-label="Product detail">
+      <div>
+        <div class="gallery" aria-hidden="false">
+          <img id="mainImage" class="main-img" src="<%= findproducts.image %>" alt="<%= findproducts.title %> manufactured by LX Max Electricals" />
+          <div class="thumbs" id="thumbs" aria-label="Product images">
+            <!-- thumbnails injected by JS -->
+          </div>
+        </div>
+
+        <div class="tabs" aria-labelledby="description-tab">
+          <div class="tab-buttons" role="tablist" aria-label="Product tabs">
+            <button id="description-tab" data-tab="description" class="active" role="tab" aria-selected="true">Description</button>
+            <!-- more buttons can be added -->
+          </div>
+          <div class="tab-panel" id="tabContent" role="tabpanel" aria-labelledby="description-tab">
+            <div class="muted">
+              <%= (findproducts.description ? (findproducts.description.charAt(0).toUpperCase() + findproducts.description.slice(1)) : 'No description available.') %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right / info column -->
+      <aside class="product-info" aria-label="Product information">
+        <h1 class="title"><%= findproducts.title.toUpperCase() %></h1>
+        <div class="spec-box" aria-label="Specifications">
+          <div><span>Business Type</span><b>Manufacturer, Exporter</b></div>
+          <div><span>Material</span><b><%= (findproducts.material || '—').toUpperCase() %></b></div>
+          <div><span>Finishing</span><b><%= findproducts.finishing || 'Polished' %></b></div>
+          <div><span>Color</span><b> 'Black, Grey,Custom,Standard' </b></div>
+          <div><span>Driver</span><b> 'Philips & Other Good Quality' </b></div>
+          <div><span>Led</span><b> cove light || PCB|| BULB </b></div>
+          <div><span>LedColor</span><b> warm white|| White||custom </b></div>
+          <div><span>Wire</span><b> KEi </b></div>
+        </div>
+
+        <a href="#" class="more-link">Click to view more</a>
+
+        <div class="actions" role="group" aria-label="Contact actions">
+          <button class="btn ghost" id="callBtn" type="button">📞 Request to Call</button>
+          <button class="btn primary" id="enqBtn" type="button">✉ Send Enquiry</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Enquiry / form -->
+    <div class="wrapper" aria-labelledby="enquiry-heading">
+      <h1 id="enquiry-heading">Looking for "<span style="color:var(--accent-2)"><%= findproducts.title.toUpperCase() %></span>" ?</h1>
+
+      <form class="enquiry-form" action="/user/enquiry" method="post" novalidate>
+        <div class="row">
+          <input type="hidden" id="hidden" name="productId" value="<%= findproducts._id %>">
+
+          <div class="input-box">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Name" required>
+          </div>
+
+          <div class="input-box">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-box full">
+            <label for="mobile">Mobile No.</label>
+            <div class="mobile-group">
+              <select aria-label="Country">
+                <option value="IN">🇮🇳 India</option>
+              </select>
+              <span style="display:inline-block;padding:10px 8px;border:1px solid #e3e6ee;border-radius:8px;background:#fff">+91</span>
+              <input id="mobile" name="mobile" type="tel" placeholder="Enter Mobile No.">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-box">
+            <label for="qty">Quantity</label>
+            <input id="qty" type="text" name="Quantity" placeholder="Estimated Quantity">
+          </div>
+          <div class="input-box">
+            <label for="unit">&nbsp;</label>
+            <select id="unit" aria-label="Unit">
+              <option>Piece</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-box full">
+            <label for="requirement">Requirement Details</label>
+            <textarea id="requirement" name="requirementDeatail">I am interested. Kindly send the quotation for the same.</textarea>
+          </div>
+        </div>
+
+        <button class="submit" type="submit">Send Enquiry</button>
+      </form>
+
+      <!-- Explore more -->
+      <section style="margin-top:22px">
+        <h2 style="font-size:28px;color:var(--accent-2);margin-bottom:12px">Explore More Products</h2>
+        <div class="product-grid" id="moreProducts">
+          <% for (let allproduct of allproducts) { %>
+            <!-- <div class="product-card">
+              <img src="<%=allproduct.image%>" alt="<%=allproduct.title%>" loading="lazy">
+              
+              
+            </div> -->
+            <div class="gallery" aria-hidden="false"  role="article" aria-label="<%=allproduct.title%>">
+          <img id="mainImage" class="main-img" src="<%= allproduct.image %>" alt="<%= allproduct.title %> image" />
+          <h3> <%= (allproduct.title ? (allproduct.title.charAt(0).toUpperCase() + allproduct.title.slice(1)) : 'No description available.') %></h3>
+<a href="/showproductinfo/<%=allproduct._id%>" class="quote-btn">Get Best Quote</a>
+        </div>
+          <% } %>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Optional: quick scroll to enquiry on "Send Enquiry" button click in product info
+    document.getElementById('enqBtn').addEventListener('click', function(){
+      const form = document.querySelector('.enquiry-form');
+      if (form) form.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    // Accessible call button placeholder
+    document.getElementById('callBtn').addEventListener('click', function(){
+      alert('Please provide your phone number in the enquiry form and we will call you.');
+      document.getElementById('mobile').focus();
+    });
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "<%= findproducts.title %>",
+  "image": "<%= findproducts.image %>",
+  "description": "<%= findproducts.description || '' %>",
+  "brand": {
+    "@type": "Brand",
+    "name": "LX Max Electricals"
+  }
+}
+</script>
+
+</body>
+

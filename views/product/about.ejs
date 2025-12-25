@@ -1,0 +1,283 @@
+<% layout('./boilerplate/boilerplate2.ejs') %>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --card:#fbfdff;
+      --accent:#0b78d1;
+      --accent-2:#1aa26a;
+      --muted:#6b6b6b;
+      --max-width:1100px;
+      --radius:14px;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color:#222;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);line-height:1.6}
+
+    /* Make all images responsive by default */
+    img{max-width:100%;height:auto;display:block}
+
+    header{padding:18px 24px;background:linear-gradient(90deg, rgba(11,120,209,0.06), rgba(26,162,106,0.02));border-bottom:1px solid rgba(11,120,209,0.06)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:24px}
+
+    /* top nav */
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:46px;height:46px;background:var(--accent);border-radius:8px;display:inline-grid;place-items:center;color:#fff;font-weight:800}
+    nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:600}
+
+    /* hero */
+    .hero-image{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding:36px 0}
+    .hero .text h1{font-size:34px;margin:0 0 10px}
+    .hero .text p{color:var(--muted);font-size:16px;margin:0 0 18px}
+    /* .hero .cta{} */
+    .hero .sub{color:var(--muted);font-size:14px;margin-top:10px}
+    .hero .visual img{width:100%;max-width:520px;border-radius:12px;box-shadow:0 10px 30px rgba(10,20,40,0.06)}
+
+    /* cards */
+    .grid-3{display:flex;gap:18px;margin:30px 0}
+    .card{flex:1;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(10,20,40,0.04)}
+    .card h3{margin:0 0 6px}
+    .card p{color:var(--muted);margin:0;font-size:15px}
+
+    /* story */
+    .story{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center;margin:36px 0}
+    .story img{width:100%;border-radius:12px}
+
+    /* values */
+    .values{display:flex;gap:14px;flex-wrap:wrap}
+    .value{flex:1;min-width:200px;background:linear-gradient(180deg,rgba(11,120,209,0.06),transparent);padding:14px;border-radius:10px}
+    .value h4{margin:0 0 6px}
+
+    /* team */
+    .team{margin:36px 0}
+    .people{display:flex;gap:16px;flex-wrap:wrap}
+    .person{width:180px;background:var(--card);padding:12px;border-radius:10px;text-align:center}
+    .avatar{width:84px;height:84px;border-radius:50%;background:#eaf6ff;margin:0 auto 12px;display:inline-grid;place-items:center;font-weight:700;color:var(--accent)}
+
+    /* footer contact */
+    .contact-cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:24px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;margin:36px 0}
+    .contact-cta a{background:#fff;color:var(--accent);padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    footer{padding:22px 0;color:var(--muted);font-size:14px}
+
+    @media (max-width:900px){
+      .hero-image,.story{grid-template-columns:1fr}
+      .grid-3{flex-direction:column}
+      .nav{flex-direction:column;align-items:flex-start;gap:10px}
+      .contact-cta{flex-direction:column;gap:12px;text-align:center}
+      .people{justify-content:center}
+      .person{width:140px}
+      .logo{width:40px;height:40px}
+    }
+
+    /* meet team */
+    .team {
+  padding: 60px 20px;
+  background: #f9fafb;
+  text-align: center;
+}
+
+.team h2 {
+  font-size: 32px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.person {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.person:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+.person h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.person p {
+  font-size: 14px;
+  color: #6b7280;
+}
+/* <!-- Quick features --> */
+/* Quick Features Section */
+.lx-features {
+  display: flex;
+  gap: 18px;
+  margin: 30px 0;
+  flex-wrap: wrap; /* ensures responsive stacking on smaller screens */
+}
+
+.lx-feature-card {
+  flex: 1;
+  background: var(--card, #fbfdff);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(10, 20, 40, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lx-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(10, 20, 40, 0.08);
+}
+
+.lx-feature-card h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+.lx-feature-card p {
+  color: var(--muted, #6b6b6b);
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Responsive for small screens */
+@media (max-width: 900px) {
+  .lx-features {
+    flex-direction: column;
+  }
+}
+
+  </style>
+<body>
+
+<main class="container">
+  <!-- Hero -->
+  <section class="hero-image" aria-labelledby="about-hero">
+    <div class="text">
+      <h1 id="about-hero">Making spaces safer and brighter</h1>
+      <p>In the dynamic city of Gurugram, Haryana, a story of illumination, innovation, and dedication began in the year 2022. LX-Max Electricals, a brainchild of the visionary Ms. Sangeeta Pradhan, stands tall as a manufacturer, exporter, and supplier of a diverse range of lighting solutions. Our offerings encompass a spectrum of premium products, including Garden Light Poles, Decorative Light Poles, Galvanized Iron Light Poles, Three Arm Light Poles, Solar Street Light Poles, Mild Steel Street Light Poles, and the welcoming Warm Light Pole.
+
+At LX-Max Electricals, we believe that light transcends its practical purpose; it symbolizes the path towards progress and the glow of a brighter future. Our journey is fueled by the pursuit of creating lighting solutions that not only illuminate spaces but also evoke emotions and inspire aesthetics.</p>
+      <a class="cta" style="display:inline-block;padding:12px 18px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700" href="#contact" onclick="openCatalog()"><i class="fas fa-file-pdf"></i> Open Catalog</a>
+      <div class="sub">ISO-tested manufacturing • Custom finishes • Nationwide delivery</div>
+    </div>
+    <div class="visual">
+      <img src="/image/decorativepost2.png" alt="LX-Max illustration">
+    </div>
+  </section>
+
+<!-- Quick features -->
+<section class="lx-features" aria-label="capabilities">
+  <div class="lx-feature-card">
+    <h3>What we make</h3>
+    <p>Decorative light poles, street light poles, garden posts, and customized architectural lighting for residential & commercial sites.</p>
+  </div>
+  <div class="lx-feature-card">
+    <h3>Why choose us</h3>
+    <p>Robust build quality, corrosion-resistant finishes, and modular designs that simplify installation and maintenance.</p>
+  </div>
+  <div class="lx-feature-card">
+    <h3>Our approach</h3>
+    <p>Customer-first design, fast prototyping, and strict quality checks to ensure every product meets safety standards.</p>
+  </div>
+</section>
+  <!-- Story -->
+  <section class="story" aria-label="our story">
+    <div>
+      <h2>Our story</h2>
+      <p style="color:var(--muted)">Started by a team of engineers and designers in 2022, LX-Max began with a simple goal: make long-lasting lighting that complements local architecture and reduces maintenance costs. Today we work with contractors, landscape designers, and municipalities across northern India.</p>
+      <p style="color:var(--muted)"><strong>Manufacturing:</strong> Our facilities follow ISO-aligned processes and use galvanized steel, powder coatings, and modular mounting to increase life-span.</p>
+    </div>
+    <div>
+      <img src="/image/decorativepost4.png" alt="factory and products">
+    </div>
+  </section>
+
+  <!-- values -->
+  <section>
+    <h2>Our values</h2>
+    <div class="values">
+      <div class="value"><h4>Durability</h4><p style="color:var(--muted)">Materials and finishes chosen to perform in real-world conditions.</p></div>
+      <div class="value"><h4>Design</h4><p style="color:var(--muted)">Aesthetic-first thinking that blends function with form.</p></div>
+      <div class="value"><h4>Sustainability</h4><p style="color:var(--muted)">Solar-ready options and energy-efficient fixtures.</p></div>
+      <div class="value"><h4>Trust</h4><p style="color:var(--muted)">Transparent pricing, warranty support and responsive field service.</p></div>
+    </div>
+  </section>
+
+  <!-- team -->
+ <section class="team">
+  <h2>Meet the Team</h2>
+
+  <div class="people">
+    <div class="person">
+      <h3>Ms. Sangeeta</h3>
+      <p>Business Development Manager</p>
+    </div>
+
+    <div class="person">
+      <h3>Alok Rai</h3>
+      <p>Quality & Compliance</p>
+    </div>
+
+    <div class="person">
+      <h3>Archna</h3>
+      <p>Lead Designer</p>
+    </div>
+
+    <div class="person">
+      <h3>Ashutosh</h3>
+      <p>Sales Executive</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- CTA contact -->
+  <section class="contact-cta" id="contact" aria-label="contact">
+    <div>
+      <h3 style="margin:0;color:#fff">Ready to light up your project?</h3>
+      <p style="margin:6px 0 0;color:rgba(255,255,255,0.92)">Tell us about your requirement and we’ll respond with options and a rough quote.</p>
+    </div>
+    <div style="text-align:right">
+      <a href="tel:+91 9958660532">Call: +91 9958660532</a>
+      <div style="height:8px"></div>
+      <a href="/contact" style="display:inline-block;margin-top:8px;background:rgba(255,255,255,0.95);padding:10px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:700">Request a Quote</a>
+    </div>
+  </section>
+
+  <footer>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <strong>LX-Max Electricals</strong><br>
+        <small style="color:var(--muted)">Manufacturers of decorative & street lighting • Gurugram, Haryana</small>
+      </div>
+    </div>
+  </footer>
+</main>
+  <script>
+    function openCatalog() {
+      window.open("/pdf/Lx Max Electricals.pdf", "_blank");
+    }
+  </script>
+</body>
+
+
+
+
+
+
+
+
+

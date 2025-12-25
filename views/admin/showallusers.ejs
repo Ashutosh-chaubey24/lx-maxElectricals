@@ -1,0 +1,140 @@
+<% layout('./boilerplate/boilerplate.ejs') %>
+<style>
+.users-wrapper {
+  padding: 40px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #1a1a1a;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 680px;
+}
+
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-radius: 14px;
+  background: #ffffff;
+  text-decoration: none;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0px 4px 14px rgba(0,0,0,0.04);
+  transition: 0.25s ease;
+}
+
+/* Unread user highlight */
+.user-card.unread {
+  background: #eff6ff; /* light blue */
+  border-color: #93c5fd; 
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.08);
+  border-color: #d1d5db;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.user-info .email {
+  margin: 3px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* TYPE BADGES */
+.badge {
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.badge.enquiry {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge.contact {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* NEW TAG */
+.new-tag {
+  background: #2563eb;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 12px;
+  text-transform: uppercase;
+}
+
+/* OLD TAG (grey style) */
+.old-tag {
+  background: #e5e7eb;
+  border: 1px solid red;
+  color: #374151;
+  padding: 4px 10px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 12px;
+  text-transform: uppercase;
+}
+
+</style>
+
+<div class="users-wrapper">
+
+  <h2 class="page-title">Users</h2>
+
+  <div class="users-list">
+    <% allUsers.forEach(u => { %>
+      
+      <a href="/admin/details/<%= u._id %>" 
+         class="user-card <%= !u.isRead ? 'unread' : '' %>">
+         
+        <div class="user-info">
+          <h3>
+            <%= u.name %>
+
+            <% if (!u.isRead) { %>
+              <span class="new-tag">Unread</span>
+            <% } else { %>
+              <span class="old-tag">Read</span>
+            <% } %>
+
+          </h3>
+
+          <p class="email"><%= u.email %></p>
+        </div>
+
+        <div class="badge <%= u.type === 'enquiry' ? 'enquiry' : 'contact' %>">
+          <%= u.type %>
+        </div>
+
+      </a>
+
+    <% }) %>
+  </div>
+
+</div>

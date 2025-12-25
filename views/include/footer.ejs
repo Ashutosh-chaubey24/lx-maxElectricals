@@ -1,0 +1,139 @@
+<style>
+.footer {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #cbd5f5;
+  padding: 60px 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer-col h3 {
+  font-size: 28px;
+  color: #fff;
+}
+
+.footer-col h3 span {
+  color: #38bdf8;
+}
+
+.footer-col h4 {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.footer-col a {
+  display: block;
+  color: #cbd5f5;
+  font-size: 14px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-col a:hover {
+  color: #38bdf8;
+  transform: translateX(6px);
+}
+
+/* Admin Icon (hidden but premium) */
+.admin-link {
+  position: absolute;
+  opacity: 0.25;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.admin-link:hover {
+  opacity: 1;
+  color: #38bdf8;
+}
+
+/* Bottom */
+.footer-bottom {
+  margin-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .footer-col a:hover {
+    transform: none;
+  }
+
+  .admin-link {
+    position: static;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+}
+
+</style>
+<body>
+    <!-- Footer -->
+    <footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+
+      <div class="footer-col brand">
+        <a href="/admin/login" class="admin-link" title="Admin Login">
+          <i class="fa-solid fa-user-shield"></i>
+        </a>
+
+        <h3><img src="/image/logo7.png" alt="" style="height: 100px; width: 150px; border-radius: 15px;"></h3>
+        <p>Premium decorative lighting and street poles engineered for durability, elegance, and reliability.</p>
+      </div>
+
+      <div class="footer-col">
+        <a href="/product"></a>
+        <h4>Products</h4>
+        <a href="#products">Street Lighting</a>
+        <a href="#products">Decorative Poles</a>
+        <a href="#products">High Mast</a>
+        <a href="#products">Solar Poles</a>
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 DecoraPoles. Engineered with precision. Trusted for quality.</p>
+    </div>
+  </div>
+</footer>
+sc
+</body>
+</html>
