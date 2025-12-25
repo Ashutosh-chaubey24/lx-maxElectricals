@@ -199,7 +199,7 @@ router.get("/all-users",checkAdminAuth, async (req, res) => {
   res.render("admin/showallusers.ejs", { allUsers });
 });
 
-router.get("/details/:id", async (req, res) => {
+router.get("/details/:id", wrapasync(async (req, res) => {
   // 1️⃣ Find user by id AND mark as read
   const user = await users.findByIdAndUpdate(
     req.params.id,
@@ -214,7 +214,7 @@ router.get("/details/:id", async (req, res) => {
     user, 
     product: user.productId 
   });
-});
+}));
 
 
 
