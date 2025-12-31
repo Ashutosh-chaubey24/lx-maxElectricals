@@ -3,60 +3,60 @@ require("dotenv").config()
 }
 const express = require("express");
 const app = express();
-const helmet = require("helmet");
-
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      defaultSrc: ["'self'"],
-      imgSrc: [
-  "'self'",
-  "data:",
-  "https://res.cloudinary.com/de9agjv9o/",
-  "https://cdn.jsdelivr.net",
-  "https://unpkg.com",
-  "https://cdnjs.cloudflare.com",
-  "https://a.tile.openstreetmap.org" , // Leaflet tiles allow
-   // ✅ OpenStreetMap tiles (IMPORTANT)
-  "https://a.tile.openstreetmap.org",
-  "https://b.tile.openstreetmap.org",
-  "https://c.tile.openstreetmap.org"
-],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "https://cdn.jsdelivr.net",
-        "https://unpkg.com"
-      ],
-      styleSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "https://fonts.googleapis.com",
-        "https://cdn.jsdelivr.net",
-        "https://unpkg.com",
-        "https://cdnjs.cloudflare.com"
-      ],
-      fontSrc: [
-        "'self'",
-        "https://fonts.gstatic.com",
-        "https://cdnjs.cloudflare.com"
-      ],
-      connectSrc: [
-        "'self'",
-        "https://cdn.jsdelivr.net",
-        "https://unpkg.com"
-      ],
-      frameAncestors: ["'self'"]
-    }
-  })
-);
+// const helmet = require("helmet");
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     useDefaults: true,
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       imgSrc: [
+//   "'self'",
+//   "data:",
+//   "https://res.cloudinary.com/de9agjv9o/",
+//   "https://cdn.jsdelivr.net",
+//   "https://unpkg.com",
+//   "https://cdnjs.cloudflare.com",
+//   "https://a.tile.openstreetmap.org" , // Leaflet tiles allow
+//    // ✅ OpenStreetMap tiles (IMPORTANT)
+//   "https://a.tile.openstreetmap.org",
+//   "https://b.tile.openstreetmap.org",
+//   "https://c.tile.openstreetmap.org"
+// ],
+//       scriptSrc: [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "https://cdn.jsdelivr.net",
+//         "https://unpkg.com"
+//       ],
+//       styleSrc: [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "https://fonts.googleapis.com",
+//         "https://cdn.jsdelivr.net",
+//         "https://unpkg.com",
+//         "https://cdnjs.cloudflare.com"
+//       ],
+//       fontSrc: [
+//         "'self'",
+//         "https://fonts.gstatic.com",
+//         "https://cdnjs.cloudflare.com"
+//       ],
+//       connectSrc: [
+//         "'self'",
+//         "https://cdn.jsdelivr.net",
+//         "https://unpkg.com"
+//       ],
+//       frameAncestors: ["'self'"]
+//     }
+//   })
+// );
 
 const flash = require("connect-flash");
 app.set("view engine","ejs")
 const path = require("path");
 app.set("views", path.join(__dirname,"views"))
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 const ExpressError=require("./ExpressError.js")
 const wrapasync=require("./wrapasync.js")
 const ejsmate = require('ejs-mate');
@@ -82,7 +82,6 @@ app.use(express.json());
 const multer  = require('multer')
 const {storage}=require("./cloudconfig.js")
 const upload = multer({storage })                                           
-app.use(express.static(path.join(__dirname, "public"))); // serve HTML/JS files
 const MONGO_URL=process.env.MONGO_URL
 
 // 1. Connect to MongoDB
@@ -147,10 +146,6 @@ app.use("/user",UserRoute); // home index
 // after all app.use(...) routes
 app.use((req, res, next) => {
   next(new ExpressError("Page not found", 404));
-});
-app.use(async (req, res, next) => {
-    res.locals.unreadCount = await Enquiry.countDocuments({ isRead: false });
-    next();
 });
 app.use((err, req, res, next) => {
   const status = err.statusCode || 500;

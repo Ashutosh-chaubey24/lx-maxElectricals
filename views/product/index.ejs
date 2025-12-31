@@ -4,10 +4,11 @@
    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
   <div class="carousel-inner ">
     <div class="carousel-item active slideImage rounded rounded-3">
-      <img src="/image/slider2.png" class=" w-100 img-fluid " alt="Decorative street light poles manufacturer in India">
+      <img src="/image/slider1.jpg" class=" w-100 img-fluid " alt="Decorative street light poles for highways in India">
     </div>
+    
      <div class="carousel-item ">
-      <img src="/image/decorativepost5.png" class=" w-100 img-fluid" alt="Decorative street light poles manufacturer in India">
+      <img src="/image/decorativepost5.png" class=" w-100 img-fluid" alt="Garden decorative lighting poles manufacturer">
     </div>
     <div class="carousel-item">
       <img src="/image/sliderimg.png" class=" w-100 img-fluid" alt="Decorative street light poles manufacturer in India">
@@ -24,7 +25,9 @@
      <div class="carousel-item">
       <img src="/image/decoslider3.jpg" class="d-block w-100 img-fluid" alt="Decorative street light poles manufacturer in India">
     </div>
-    
+    <div class="carousel-item active slideImage rounded rounded-3">
+      <img src="/image/slider2.png" class=" w-100 img-fluid " alt="Decorative street light poles for highways in India">
+    </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
@@ -48,7 +51,7 @@
 
   <div class="category-card" data-filter="decorative-poles">
       <div class="category-image">
-          <img src="/image/poles1.jpg" alt="Garden Poles">
+          <img src="/image/decorativecat.jpg" alt="decorative Poles">
       </div>
       <h3>Decorative Poles</h3>
   </div>
@@ -69,7 +72,7 @@
 
   <div class="category-card" data-filter="camera-poles">
       <div class="category-image">
-          <img src="/image/camarapols2.jpg" alt="Camera Poles">
+          <img src="/image/camarapole.png" alt="Camera Poles">
       </div>
       <h3>Camera Poles</h3>
   </div>
@@ -126,8 +129,9 @@
                             <div>Height <span><%= p.height %></span></div>
                         </div>
                         <div class="product-buttons">
-                            <button class="cta-btn1 openModalBtn" data-id="<%= p._id %>">Get Quote</button>
-
+                           <button type="button" class="cta-btn1 openModalBtn" data-id="<%= p._id %>">
+  Get Quote
+</button>
                             <form action="/showproductinfo/<%= p._id %>" method="get">
                                 <button class="cta-btn1 view-btn">View</button>
                             </form>
@@ -139,10 +143,6 @@
         </div>
     </div>
 </section>
-
-
-
-
 <div class="customModal" id="quoteModal">
     <div class="modalBox">
 
@@ -153,8 +153,8 @@
             <div class="imgWrapper">
                 <img src="" id="img"alt="Product Image"  style="height: 400px; background-size: cover;" >
             </div>
-            <p class="moq" id="height"></p>
-            <p class="moq" id="material"></p>
+            <b>Material</b><p class="moq" id="material"></p>
+<b>Height</b><p class="moq" id="height"></p>
         </div>
 
         <!-- RIGHT SIDE: FORM -->
@@ -360,6 +360,61 @@ Reach out to us and our team will get back to you shortly.</b> </div>
 
   </div>
 </section>
+<section class="seo-content">
+  <div class="container">
+
+    <div class="seo-grid">
+
+      <!-- Main Card -->
+      <div class="seo-card seo-card-main">
+        <h2>Leading Decorative & Street Light Poles Manufacturer in India</h2>
+        <p>
+          LX Max Electricals is a trusted manufacturer and supplier of high-quality decorative
+          street light poles, bollard lighting poles, solar lighting poles, camera poles,
+          traffic signal poles, and high mast poles in India. With years of industry experience,
+          we specialize in designing durable and aesthetically pleasing lighting solutions for
+          urban infrastructure, highways, residential projects, commercial spaces, and
+          government installations.
+        </p>
+      </div>
+
+      <!-- Card 1 -->
+      <div class="seo-card">
+        <h3>Premium Quality Lighting Poles</h3>
+        <p>
+          Our product range includes street lighting poles for roads and highways, decorative
+          poles for parks and gardens, bollard lights for pathways, and solar poles for
+          sustainable lighting solutions. Manufactured using premium-grade galvanized and
+          mild steel for long-lasting performance.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="seo-card">
+        <h3>Custom Design & Bulk Manufacturing</h3>
+        <p>
+          We offer custom pole designs based on height, arm configuration, mounting type,
+          and application. Our in-house facility supports bulk manufacturing with consistent
+          quality and timely delivery across India.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="seo-card">
+        <h3>Why Choose LX Max Electricals</h3>
+        <p>
+          Known for quality, safety, and reliability, our lighting poles are used in smart
+          city projects, highways, industrial areas, and commercial developments. We ensure
+          seamless service from enquiry to installation.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
 
    <!-- end -->
   <!-- map div -->
@@ -369,175 +424,49 @@ Reach out to us and our team will get back to you shortly.</b> </div>
 
 
 </div>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+ <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  // Fixed coordinates
-  const lat = 28.448091;
-  const lng = 76.9916983;
+  document.addEventListener("DOMContentLoaded", function () {
+    const mapElement = document.getElementById("map");
 
-  // Create map
-  const map = L.map("map").setView([lat, lng], 16);
+    // Load Leaflet only if map exists
+    if (mapElement) {
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/leaflet/dist/leaflet.js";
+      script.defer = true;
 
-  // Add tile layer
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 20,
-  }).addTo(map);
+      script.onload = function () {
+        // Map init AFTER leaflet loads
+        const lat = 28.448091;
+        const lng = 76.9916983;
 
-  // Add marker
-  const marker = L.marker([lat, lng]).addTo(map)
-    .bindPopup("Kadipur Industrial Area - Gali No. 8 ")
-    .openPopup();
+        const map = L.map("map").setView([lat, lng], 16);
 
-  // Click → open Google Maps
- map.on('click', function () {
-  const placeName = "Gali No. 8, Kadipur Industrial Area, Sector 37C, Gurugram, Haryana 122006";
-  
-  const googleURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeName)}`;
-  
-  window.open(googleURL, "_blank");
-});
-</script>
-</body>
-    <!-- modal script -->
-<script>
-    const modal = document.getElementById("quoteModal");
-    const openBtn = document.querySelectorAll(".openModalBtn");
-    const closeBtn = document.querySelector(".closeBtn");
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 20,
+        }).addTo(map);
 
-    // Open modal
-    openBtn.forEach( button =>{
-        button.addEventListener("click", async(btn) => {
-            console.log("btn was cliked")
-        modal.style.display = "flex";
-        console.log("hello btn was  clicked");
-        let id = button.dataset.id;
-        console.log(id)
-    console.log("Editing Product ID:", id);
-    // Fetch product details
-    let res = await fetch(`/showinfomodal/${id}`);
-    let data = await res.json();
-    console.log(data)
-    // fill modal
-    //  document.getElementById("edit_id").value = data._id;
-    document.getElementById("title").textContent = data.title;
-    document.getElementById("img").src = data.image;
-    document.getElementById("height").textContent= data.height;
-    document.getElementById("material").textContent= data.matetial;
-      document.getElementById("productid").value= data._id;
-    });
-    });
-    
+        L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup("Kadipur Industrial Area - Gali No. 8")
+          .openPopup();
 
-    // Close modal
-    closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
+        map.on("click", function () {
+          const placeName =
+            "Gali No. 8, Kadipur Industrial Area, Sector 37C, Gurugram, Haryana 122006";
 
-    // Close by clicking outside
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-</script>
+          const googleURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            placeName
+          )}`;
 
-<!-- About script -->
- <script>
-// Simple count-up animation
-function animateCounts(){
-const els = document.querySelectorAll('.num[data-target]');
-els.forEach(el=>{
-const target = +el.getAttribute('data-target');
-let current = 0;
-const step = Math.max(1, Math.floor(target / 60));
-const id = setInterval(()=>{
-current += step;
-if(current >= target){
-el.textContent = target + (target === 100 ? '%' : '+');
-clearInterval(id);
-} else {
-el.textContent = current + (target === 100 ? '%' : '+');
-}
-}, 14);
-})
-}
+          window.open(googleURL, "_blank");
+        });
+      };
 
-
-// Trigger when section is in view
-const obs = new IntersectionObserver(entries=>{
-entries.forEach(e=>{ if(e.isIntersecting){ animateCounts(); obs.disconnect(); } })
-}, {threshold:0.3});
-obs.observe(document.querySelector('.section'));
-</script>
-<script>
-  // small client-side validation + pleasant interactions
-  (function(){
-    const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-
-    function isEmail(val){
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      document.body.appendChild(script);
     }
-
-    function showError(input){
-      input.classList.add('error');
-      setTimeout(()=> input.classList.remove('error'), 2200);
-    }
-
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      const name = form.name;
-      const email = form.email;
-      const message = form.message;
-
-      let ok = true;
-      if(!name.value.trim()){ showError(name); ok=false; }
-      if(!isEmail(email.value.trim())){ showError(email); ok=false; }
-      if(!message.value.trim()){ showError(message); ok=false; }
-
-      if(!ok) return;
-
-      // simulate send
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      // fake send flow (replace with real fetch to your API)
-      setTimeout(()=>{
-        submitBtn.textContent = 'Message Sent ✓';
-        submitBtn.style.boxShadow = '0 8px 20px rgba(16, 80, 120, 0.06)';
-        form.reset();
-
-        // revert after a while
-        setTimeout(()=>{
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Message';
-        }, 2300);
-      }, 900);
-    });
-
-    // small improvement: remove error state on input
-    form.querySelectorAll('.field').forEach(f => {
-      f.addEventListener('input', ()=> f.classList.remove('error'));
-    });
-  })();
-</script>
-<!-- filter by image -->
- <script>
-  const categoryCards = document.querySelectorAll(".category-card");
-
-  categoryCards.forEach(card => {
-    card.addEventListener("click", () => {
-      const category = card.dataset.filter;
-      window.location.href = `/product?category=${category}`;
-    });
   });
 </script>
- <script>
-    function openCatalog() {
-      window.open("/pdf/Lx Max Electricals.pdf", "_blank");
-    }
-  </script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+
 </body>
 

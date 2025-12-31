@@ -1,40 +1,49 @@
-/* Background */
+/* ======================
+   MODAL BACKGROUND
+====================== */
 .customModal {
-    display: none;
+    display: none;     /* ✔ ONLY THIS */
     position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
     z-index: 9999;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
 }
 
-/* Main Box */
+
+/* ======================
+   MODAL BOX
+====================== */
 .modalBox {
     background: #fff;
     width: 900px;
+    max-width: 95%;
     display: flex;
-    padding: 0;
-    border-radius: 10px;
+    border-radius: 12px;
+    overflow: hidden;
     position: relative;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease;
 }
 
-/* Left: Image + Info */
+/* ======================
+   LEFT SECTION
+====================== */
 .leftSection {
     width: 45%;
-    background: #f5f5f5;
+    height: 100%;
+    background: white;
     padding: 20px;
-    border-right: 2px solid #ddd;
+    border-right: 2px solid #e0e0e0;
 }
 
-.leftSection .productTitle {
-    background: #4b4b4b;
+.productTitle {
+    background: #444;
     color: #fff;
     padding: 10px;
     font-size: 20px;
     text-align: center;
+    border-radius: 6px;
     margin-bottom: 15px;
 }
 
@@ -45,22 +54,21 @@
 }
 
 .imgWrapper img {
-    width: 90%;
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
     border-radius: 6px;
 }
 
-/* Price & MOQ */
-.price, .moq {
-    font-size: 16px;
+.leftSection .moq {
     margin-top: 10px;
+    font-size: 15px;
+    color: #333;
 }
 
-.price span {
-    font-weight: bold;
-    color: #000;
-}
-
-/* Right: Form */
+/* ======================
+   RIGHT SECTION
+====================== */
 .rightSection {
     width: 55%;
     padding: 25px;
@@ -71,31 +79,43 @@
     color: #fff;
     padding: 10px;
     text-align: center;
-    margin-bottom: 20px;
     border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 18px;
 }
 
-/* Form Elements */
+/* ======================
+   FORM STYLES
+====================== */
 .formGroup {
     margin-bottom: 15px;
 }
 
 .formGroup label {
+    display: block;
     font-weight: 600;
+    margin-bottom: 6px;
 }
 
 .formGroup input,
-.formGroup select {
+.formGroup textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #bbb;
     border-radius: 6px;
+    font-size: 14px;
 }
 
-/* Mobile Flag + Input */
+.formGroup textarea {
+    min-height: 90px;
+    resize: none;
+}
+
+/* ======================
+   MOBILE INPUT
+====================== */
 .mobileBox {
     display: flex;
-    align-items: center;
     gap: 10px;
 }
 
@@ -103,9 +123,12 @@
     background: #eee;
     padding: 10px 12px;
     border-radius: 6px;
+    font-size: 14px;
 }
 
-/* Submit Button */
+/* ======================
+   SUBMIT BUTTON
+====================== */
 .submitBtn {
     width: 100%;
     padding: 12px;
@@ -121,118 +144,95 @@
     background: #0c4e8f;
 }
 
-/* Close Button */
+/* ======================
+   CLOSE BUTTON
+====================== */
 .closeBtn {
     position: absolute;
-    right: 15px;
     top: 10px;
+    right: 15px;
     font-size: 28px;
+    cursor: pointer;
     font-weight: bold;
-    cursor: pointer;
 }
 
-/* Animation */
+/* ======================
+   ANIMATION
+====================== */
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
+/* ======================
+   RESPONSIVE
+====================== */
 
-/* show pages css */
-
-.product-container {
-    width: 90%;
-    margin: 40px auto;
-    display: flex;
-    gap: 40px;
+/* Tablet */
+@media (max-width: 1024px) {
+    .modalBox {
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
 }
 
-.product-left {
-    width: 40%;
+/* Mobile */
+@media (max-width: 768px) {
+    .customModal {
+        align-items: flex-start;
+        padding: 20px 10px;
+    }
+
+    .modalBox {
+        flex-direction: column;
+        width: 100%;
+        max-height: 95vh;
+    }
+
+    .leftSection,
+    .rightSection {
+        width: 100%;
+    }
+
+    .leftSection {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .imgWrapper img {
+        max-height: 260px;
+    }
+
+    .mobileBox {
+        flex-direction: column;
+    }
+
+    .closeBtn {
+        top: 6px;
+        right: 10px;
+        font-size: 24px;
+    }
 }
 
-.image-box {
-    width: 100%;
-    height: 450px;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f5f5f5;
-}
+/* Small Mobile */
+@media (max-width: 480px) {
+    .productTitle {
+        font-size: 16px;
+    }
 
-.image-box img {
-    max-height: 400px;
-    width: auto;
-}
+    .quoteTitle {
+        font-size: 16px;
+    }
 
-.product-right {
-    width: 60%;
-}
-
-.product-right h1 {
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
-.price {
-    font-size: 24px;
-    color: #1d7a37;
-    margin-bottom: 0;
-}
-
-.moq {
-    color: gray;
-    margin-bottom: 20px;
-}
-
-.input-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.input-group input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    width: 150px;
-}
-
-.btn-primary {
-    background: #153bb6;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-outline {
-    padding: 10px 20px;
-    border: 1px solid #153bb6;
-    color: #153bb6;
-    cursor: pointer;
-    background: white;
-}
-
-.info-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.info-table th,
-.info-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-.info-table th {
-    background: #f0f0f0;
-    width: 200px;
-}
-
-.action-buttons {
-    margin-top: 30px;
-    display: flex;
-    gap: 15px;
+    .submitBtn {
+        font-size: 15px;
+    }
 }

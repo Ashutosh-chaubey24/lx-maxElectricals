@@ -153,73 +153,9 @@
         <span class="closeBtn">&times;</span>
     </div>
 </div>
-            <script>
-    const modal = document.getElementById("quoteModal");
-    const openBtn = document.querySelectorAll(".openModalBtn");
-    const closeBtn = document.querySelector(".closeBtn");
 
-    // Open modal
-    openBtn.forEach( button =>{
-        button.addEventListener("click", async(btn) => {
-            console.log("btn was cliked")
-        modal.style.display = "flex";
-        console.log("hello btn was  clicked");
-        let id = button.dataset.id;
-        console.log(id)
-    console.log("Editing Product ID:", id);
-    // Fetch product details
-    let res = await fetch(`/showinfomodal/${id}`);
-    let data = await res.json();
-    console.log(data)
-    // fill modal
-    //  document.getElementById("edit_id").value = data._id;
-    document.getElementById("title").textContent = data.title;
-    document.getElementById("img").src = data.image;
-    document.getElementById("price").textContent = data.price;
-    document.getElementById("height").textContent= data.height;
-    document.getElementById("material").textContent = data.material;
-    document.getElementById("productid").value= data._id;
 
-    });
-    });
-    
 
-    // Close modal
-    closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-
-    // Close by clicking outside
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-</script>
-<!-- filter -->
- <script>
-  const buttons = document.querySelectorAll(".filter-btn");
-
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const category = btn.getAttribute("data-filter");
-      window.location.href = `/product?category=${category}`;
-    });
-  });
-</script>
 
 </body>
 
-<!-- <script>
-  function gotlocation(possition){
-console.log(possition)
-  }
-  function failed(){
-    console.log("not get location")
-  }
-  const btn =document.querySelector("#get")
-  btn.addEventListener("click",async()=>{
-    console.log("ok")
-    navigator.geolocation.getCurrentPosition(gotlocation,failed)
-  })
-</script> -->

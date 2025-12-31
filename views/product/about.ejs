@@ -71,50 +71,7 @@
       .logo{width:40px;height:40px}
     }
 
-    /* meet team */
-    .team {
-  padding: 60px 20px;
-  background: #f9fafb;
-  text-align: center;
-}
 
-.team h2 {
-  font-size: 32px;
-  margin-bottom: 40px;
-  font-weight: 600;
-}
-
-.people {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.person {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.person:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
-}
-
-.person h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.person p {
-  font-size: 14px;
-  color: #6b7280;
-}
 /* <!-- Quick features --> */
 /* Quick Features Section */
 .lx-features {
@@ -158,6 +115,95 @@
     flex-direction: column;
   }
 }
+/* met team */
+.team-showcase {
+  padding: 70px 20px;
+  background: linear-gradient(180deg, #f9fafb, #ffffff);
+}
+
+.team-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 45px;
+  font-weight: 600;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* Team Card */
+.team-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.08);
+}
+
+/* Avatar (Initial letter) */
+.team-avatar {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b78d1, #1aa26a);
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-name {
+  font-size: 18.5px;
+  margin-bottom: 6px;
+}
+
+.team-role {
+  font-size: 14.5px;
+  color: #6b6b6b;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-heading {
+    font-size: 28px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-card {
+    padding: 26px 20px;
+  }
+
+  .team-heading {
+    font-size: 24px;
+  }
+}
 
   </style>
 <body>
@@ -182,15 +228,29 @@ At LX-Max Electricals, we believe that light transcends its practical purpose; i
 <section class="lx-features" aria-label="capabilities">
   <div class="lx-feature-card">
     <h3>What we make</h3>
-    <p>Decorative light poles, street light poles, garden posts, and customized architectural lighting for residential & commercial sites.</p>
+    <p>
+At LX Max Electricals, we manufacture a wide range of lighting poles and
+infrastructure solutions designed for durability, safety, and visual appeal.
+Our products are engineered to meet the needs of urban, commercial, and
+industrial projects across India.
+</p>
   </div>
   <div class="lx-feature-card">
     <h3>Why choose us</h3>
-    <p>Robust build quality, corrosion-resistant finishes, and modular designs that simplify installation and maintenance.</p>
+<p>
+          LX Max Electricals is a reliable manufacturer of decorative street light poles,
+          bollard lighting poles, solar poles, and high mast structures in India. Our
+          products are widely used in infrastructure, commercial, and residential projects
+          across the country.
+        </p>
   </div>
   <div class="lx-feature-card">
     <h3>Our approach</h3>
-    <p>Customer-first design, fast prototyping, and strict quality checks to ensure every product meets safety standards.</p>
+    <p>
+We follow a customer-first approach focused on thoughtful design, fast prototyping,
+and strict quality checks. Every lighting pole is engineered to meet safety standards,
+performance requirements, and long-term durability for real-world applications.
+</p>
   </div>
 </section>
   <!-- Story -->
@@ -217,31 +277,42 @@ At LX-Max Electricals, we believe that light transcends its practical purpose; i
   </section>
 
   <!-- team -->
- <section class="team">
-  <h2>Meet the Team</h2>
+<section class="team-showcase">
+  <div class="team-wrap">
 
-  <div class="people">
-    <div class="person">
-      <h3>Ms. Sangeeta</h3>
-      <p>Business Development Manager</p>
+    <h2 class="team-heading">Meet Our Leadership Team</h2>
+
+    <div class="team-grid">
+
+      <div class="team-card">
+        <div class="team-avatar">S</div>
+        <h3 class="team-name">Ms. Sangeeta</h3>
+        <p class="team-role">Business Development Manager</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">A</div>
+        <h3 class="team-name">Alok Rai</h3>
+        <p class="team-role">Quality &amp; Compliance</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">A</div>
+        <h3 class="team-name">Archna</h3>
+        <p class="team-role">Lead Designer</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">A</div>
+        <h3 class="team-name">Ashutosh</h3>
+        <p class="team-role">Sales Executive</p>
+      </div>
+
     </div>
 
-    <div class="person">
-      <h3>Alok Rai</h3>
-      <p>Quality & Compliance</p>
-    </div>
-
-    <div class="person">
-      <h3>Archna</h3>
-      <p>Lead Designer</p>
-    </div>
-
-    <div class="person">
-      <h3>Ashutosh</h3>
-      <p>Sales Executive</p>
-    </div>
   </div>
 </section>
+
 
 
   <!-- CTA contact -->

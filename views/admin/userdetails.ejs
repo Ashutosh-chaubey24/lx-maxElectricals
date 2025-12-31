@@ -119,11 +119,10 @@
       <% if(user && user.requirementDeatail) { %>
         <div class="pv-require"><%= user.requirementDeatail %></div>
       <% } %>
-
       <div class="pv-actions">
-        <a class="pv-btn pv-btn-ghost" href="mailto:<%= user && user.email ? user.email : '' %>">Message</a>
+        <a class="pv-btn pv-btn-ghost" href="mailto:<%= user && user.email ? user.email : '' %>">Email</a>
+        <a class="pv-btn pv-btn-ghost" href="https://wa.me/user.mobile">WhatsApp</a>
         <a class="pv-btn pv-btn-ghost" href="tel:<%= user && user.mobile ? user.mobile : '' %>">Call</a>
-        <a class="pv-btn pv-btn-primary" href="/admin/quotes/create?user=<%= user && user._id ? user._id : '' %>">Create Quote</a>
       </div>
     </div>
 
@@ -132,9 +131,7 @@
       <div class="pv-product-top">
         <div class="pv-prod-title">Product selected by this user</div>
         <div style="display:flex;gap:8px;align-items:center">
-          <form method="post" action="/admin/users/<%= user && user._id ? user._id : '' %>/clear-product" style="margin:0">
-            <button type="submit" class="pv-btn pv-btn-ghost">Clear</button>
-          </form>
+         
         </div>
       </div>
 

@@ -43,7 +43,7 @@ router.post("/add",validate(productSchema),upload.single('image'),checkAdminAuth
 res.redirect("/admin/allproducts")
 }));
 // create multiple-admin
-router.get("/register", (req, res) => {
+router.get("/register", checkAdminAuth,(req, res) => {
   res.render("admin/adminregister.ejs");
 });
 
@@ -73,7 +73,7 @@ router.post(
     const { username, password } = req.body;
 
     const admin = await Admin.findOne({ username });
-    console.log(admin)
+    console.log(admin ,"hello")
 
     if (!admin) {
       req.flash("error", "Invalid username or password!");
@@ -190,15 +190,21 @@ res.redirect("/admin/products");
 res.redirect("/admin/products");
   }
 }));
-router.get("/all-users",checkAdminAuth, async (req, res) => {
+//show allusers
+router.get("/all-users",checkAdminAuth,wrapasync(async (req, res) => {
   const allUsers = await users
     .find()
     .populate("productId")
     .sort({ isRead: 1, createdAt: -1 });
-
   res.render("admin/showallusers.ejs", { allUsers });
-});
-
+}));
+// userdeleted
+router.post("/delete-user", checkAdminAuth,wrapasync( async (req, res) => {
+    await users.findByIdAndDelete(req.body.userId);
+    req.flash("success", "user Deleted successfully ");
+   return res.redirect("/admin/all-users");
+}));
+// is read and unread
 router.get("/details/:id", wrapasync(async (req, res) => {
   // 1️⃣ Find user by id AND mark as read
   const user = await users.findByIdAndUpdate(
@@ -206,7 +212,6 @@ router.get("/details/:id", wrapasync(async (req, res) => {
     { isRead: true },       // mark as read
     { new: true }           // updated document wapas mile
   ).populate("productId");
-
   console.log(user);
 
   // 2️⃣ Render details page
