@@ -118,7 +118,7 @@ store.on("error",()=>{
   console.log("error in mongo session  stote",err)
 })
 app.use(flash());
-app.use(wrapasync(async(req, res, next) => {
+app.use(async(req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
      res.locals.totalProducts = await product.countDocuments();
@@ -126,7 +126,11 @@ app.use(wrapasync(async(req, res, next) => {
        res.locals.unreadCounts = await allUsers.countDocuments({ isRead: false });
        res.locals.alladmin=await Admin.countDocuments()
     next();
-}));
+});
+app.get("/flash-test", (req, res) => {
+  req.flash("success", "FLASH WORKING TEST ✅");
+  res.redirect("/");
+});
 const setType = (req, res, next) => {
     if (req.originalUrl.startsWith("/user/contact")) {
         req.body.type = "contact";
@@ -150,8 +154,10 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   const status = err.statusCode || 500;
   err.status = status;
-
-  res.status(status).render("product/error.ejs", { err });
+console.log(status,"hello")
+console.log(err.message)
+// console.log(err)
+res.render("product/error.ejs", { err });
 });
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

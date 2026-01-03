@@ -246,33 +246,48 @@
 <div class="container">
 
   <!-- LEFT: CONTACT FORM -->
-  <div class="contactForm">
-    <h3>Send Us a Message</h3>
+<div class="contactForm">
+  <h3>Send Us a Message</h3>
 
-    <form method="post" action="/user/contact">
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" name="name" required>
+  <form method="post" action="/user/contact" class="needs-validation" novalidate>
+
+    <div class="mb-3">
+      <label class="form-label">Your Name</label>
+      <input type="text" name="name" class="form-control" required>
+      <div class="invalid-feedback">
+        Please enter your name
       </div>
+    </div>
 
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" name="email">
+    <div class="mb-3">
+      <label class="form-label">Email Address</label>
+     <input type="email" name="email" class="form-control" required>
+      <div class="invalid-feedback">
+        Please enter a valid email
       </div>
+    </div>
 
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="text" name="mobile" required>
+    <div class="mb-3">
+      <label class="form-label">Phone Number</label>
+      <input type="text" name="mobile" class="form-control" pattern="[0-9]{10}" required>
+      <div class="invalid-feedback">
+        Please enter a valid 10-digit phone number
       </div>
+    </div>
 
-      <div class="form-group">
-        <label>Your Message</label>
-        <textarea name="requirementDeatail" rows="4" required></textarea>
+    <div class="mb-3">
+      <label class="form-label">Your Message</label>
+      <textarea name="requirementDeatail" rows="4" class="form-control" required></textarea>
+      <div class="invalid-feedback">
+        Please write your message
       </div>
+    </div>
 
-      <button type="submit" class="submitBtn">Submit</button>
-    </form>
-  </div>
+    <button type="submit" class="submitBtn">Submit</button>
+
+  </form>
+</div>
+
 
   <!-- RIGHT: CONTACT DETAILS + MAP -->
   <div class="infoBox">
@@ -382,6 +397,24 @@
 });
 
 </script>
+<script>
+(() => {
+  'use strict';
+
+  const forms = document.querySelectorAll('.needs-validation');
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+
 </body>
 
 

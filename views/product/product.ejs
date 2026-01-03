@@ -87,72 +87,88 @@
 </section>
 <!-- modal -->
 <div class="customModal" id="quoteModal">
-    <div class="modalBox">
+  <div class="modalBox">
 
-        <!-- LEFT SIDE: PRODUCT INFO -->
-        <div class="leftSection">
-            <h3 class="productTitle" id="title">Solar Street Light Pole</h3>
+    <!-- LEFT SIDE -->
+    <div class="leftSection">
+      <h3 class="productTitle" id="title">Solar Street Light Pole</h3>
 
-            <div class="imgWrapper">
-                <img src="" id="img"alt="Product Image"  style="height: 400px; background-size: cover;" >
-            </div>
-            <p class="moq" id="height"></p>
-            <p class="moq" id="material"></p>
-        </div>
+      <div class="imgWrapper">
+        <img src="" id="img" alt="Product Image" style="height:400px;object-fit:cover;">
+      </div>
 
-        <!-- RIGHT SIDE: FORM -->
-        <div class="rightSection">
-            <h3 class="quoteTitle">Get a Quick Quote</h3>
-
-            <form class="quoteForm" method="post" action="/user/enquiry">
-               <input type="hidden" id="productid" name="productId">
-
-                
-                 <div class="formGroup">
-                    <label>Name</label>
-                    <input type="text" name="name" required placeholder="Enter Quantity">
-                </div>
-                 <div class="formGroup">
-                    <label>Email</label>
-                    <input type="email" name="email" required placeholder="Enter Quantity">
-                </div>
-                <div class="formGroup">
-                    <label>Quantity</label>
-                    <input type="number" name="Quantity" required placeholder="Enter Quantity">
-                </div>
-
-                <!-- <div class="formGroup">
-                    <label>Measurement Unit</label>
-                    <select>
-                        <option>Piece</option>
-                        <option>Meter</option>
-                        <option>Set</option>
-                    </select>
-                </div> -->
-
-                <div class="formGroup">
-                    <label>Mobile No.</label>
-                    <div class="mobileBox">
-                        <span class="flag">🇮🇳 +91</span>
-                        <input type="text" name="mobile" required placeholder="Enter Mobile Number">
-                    </div>
-                </div>
-                 <div class="formGroup">
-                  <label class="label" for="message">Message</label>
-                    
-                         
-          <textarea    name="requirementDeatail" class="field" placeholder="Tell us about your project or question..." required></textarea>
-                   
-                </div>
-
-                <button type="submit" class="submitBtn">Send Enquiry</button>
-            </form>
-        </div>
-
-        <!-- CLOSE -->
-        <span class="closeBtn">&times;</span>
+      <p class="moq" id="height"></p>
+      <p class="moq" id="material"></p>
     </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="rightSection">
+      <h3 class="quoteTitle">Get a Quick Quote</h3>
+
+      <!-- ⭐ Bootstrap validation -->
+      <form class="quoteForm needs-validation" novalidate method="post" action="/user/enquiry">
+        <input type="hidden" id="productid" name="productId">
+
+        <div class="formGroup mb-3">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" required>
+          <div class="invalid-feedback">
+            Name is required
+          </div>
+        </div>
+
+        <div class="formGroup mb-3">
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" required>
+          <div class="invalid-feedback">
+            Enter a valid email
+          </div>
+        </div>
+
+        <div class="formGroup mb-3">
+          <label>Quantity</label>
+          <input type="number" name="Quantity" class="form-control" min="1" required>
+          <div class="invalid-feedback">
+            Quantity must be at least 1
+          </div>
+        </div>
+
+        <div class="formGroup mb-3">
+          <label>Mobile No.</label>
+          <div class="input-group">
+            <span class="input-group-text">🇮🇳 +91</span>
+            <input type="text"
+                   name="mobile"
+                   class="form-control"
+                   pattern="[0-9]{10}"
+                   required>
+            <div class="invalid-feedback">
+              Enter valid 10 digit mobile number
+            </div>
+          </div>
+        </div>
+
+        <div class="formGroup mb-3">
+          <label>Message</label>
+          <textarea name="requirementDeatail"
+                    class="form-control"
+                    rows="3"
+                    required></textarea>
+          <div class="invalid-feedback">
+            Message is required
+          </div>
+        </div>
+
+        <button type="submit" class="submitBtn btn btn-primary w-100">
+          Send Enquiry
+        </button>
+      </form>
+    </div>
+
+    <span class="closeBtn">&times;</span>
+  </div>
 </div>
+
 
 
 

@@ -1,9 +1,7 @@
-// ExpressError.js (recommended)
 class ExpressError extends Error {
-  constructor(message = "Something went wrong", status = 500) {
+  constructor(statusCode, message) {
     super(message);
-    this.status = status;
-    Error.captureStackTrace(this, this.constructor);
+    this.statusCode = statusCode;
   }
 }
 module.exports = ExpressError;

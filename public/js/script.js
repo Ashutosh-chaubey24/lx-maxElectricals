@@ -105,29 +105,43 @@ el.textContent = current + (target === 100 ? '%' : '+');
 
 // about
 
-// Simple count-up animation
-function animateCounts(){
-const els = document.querySelectorAll('.num[data-target]');
-els.forEach(el=>{
-const target = +el.getAttribute('data-target');
-let current = 0;
-const step = Math.max(1, Math.floor(target / 60));
-const id = setInterval(()=>{
-current += step;
-if(current >= target){
-el.textContent = target + (target === 100 ? '%' : '+');
-clearInterval(id);
-} else {
-el.textContent = current + (target === 100 ? '%' : '+');
-}
-}, 14);
-})
+// Count-up animation
+function animateCounts() {
+  const els = document.querySelectorAll('.num[data-target]');
+  els.forEach(el => {
+    const target = +el.getAttribute('data-target');
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 60));
+
+    const id = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        el.textContent = target + (target === 100 ? '%' : '+');
+        clearInterval(id);
+      } else {
+        el.textContent = current + (target === 100 ? '%' : '+');
+      }
+    }, 14);
+  });
 }
 
+// Trigger when section comes into view
+const section = document.querySelector('.section');
 
-// Trigger when section is in view
-const obs = new IntersectionObserver(entries=>{
-entries.forEach(e=>{ if(e.isIntersecting){ animateCounts(); obs.disconnect(); } })
-}, {threshold:0.3});
-obs.observe(document.querySelector('.section'));
+if (section) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounts();
+        obs.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  obs.observe(section);
+}
+
+// form validation like must be 10digit no
+
+
 

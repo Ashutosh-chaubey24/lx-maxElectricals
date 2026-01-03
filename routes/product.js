@@ -10,7 +10,7 @@ router.get("/", wrapasync(async (req, res) => {
     const allproducts = await product.find().sort({ createdAt: -1 }).limit(16);
     res.render("product/index.ejs", { 
         allproducts,
-        pageTitle: "Home | LX Max Electricals",
+        pageTitle: "decorative light pole manufacturer in India | LX Max Electricals",
         pageDescription: "LX Max Electricals is a leading manufacturer of decorative, street light, high mast, camera and traffic signal poles in India.",
         pageCanonical: "https://www.lxmaxelectricals.com/"
     });

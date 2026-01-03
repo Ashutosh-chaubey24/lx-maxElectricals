@@ -19,7 +19,6 @@ const servervalidation = Joi.object({
         .required(),
 
     requirementDeatail: Joi.string()
-        .min(3)
         .required(),
 
     // Quantity → only required in enquiry

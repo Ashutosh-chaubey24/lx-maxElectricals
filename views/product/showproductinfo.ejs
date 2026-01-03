@@ -67,11 +67,7 @@
       padding:6px 0 0 0;
       font-family:Inter, Arial;
     }
-    .title{font-size:20px;font-weight:700;margin-bottom:6px;color:#0b3a7e}
-    .sku{color:var(--muted);font-size:13px;margin-bottom:8px}
-    .price-row{display:flex;align-items:baseline;gap:12px;margin:8px 0}
-    .price{font-size:24px;font-weight:800;color:var(--accent-2)}
-    .old-price{text-decoration:line-through;color:var(--muted);font-weight:600}
+
 
     .spec-box{margin-top:16px;border-radius:8px;padding:10px;background:#fbfdff}
     .spec-box div{display:flex;justify-content:space-between;padding:8px 4px;border-bottom:1px solid #eef2f6}
@@ -214,79 +210,83 @@
     </div>
 
     <!-- Enquiry / form -->
-    <div class="wrapper" aria-labelledby="enquiry-heading">
-      <h1 id="enquiry-heading">Looking for "<span style="color:var(--accent-2)"><%= findproducts.title.toUpperCase() %></span>" ?</h1>
+     <div class="wrapper">
+     <h1 id="enquiry-heading">Looking for "<span style="color:var(--accent-2)"><%= findproducts.title.toUpperCase() %></span>" ?</h1>
+    <form class="enquiry-form needs-validation" action="/user/enquiry" method="post" novalidate>
 
-      <form class="enquiry-form" action="/user/enquiry" method="post" novalidate>
-        <div class="row">
-          <input type="hidden" id="hidden" name="productId" value="<%= findproducts._id %>">
+  <input type="hidden" name="productId" value="<%= findproducts._id %>">
 
-          <div class="input-box">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Name" required>
-          </div>
-
-          <div class="input-box">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="Email">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-box full">
-            <label for="mobile">Mobile No.</label>
-            <div class="mobile-group">
-              <select aria-label="Country">
-                <option value="IN">🇮🇳 India</option>
-              </select>
-              <span style="display:inline-block;padding:10px 8px;border:1px solid #e3e6ee;border-radius:8px;background:#fff">+91</span>
-              <input id="mobile" name="mobile" type="tel" placeholder="Enter Mobile No.">
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-box">
-            <label for="qty">Quantity</label>
-            <input id="qty" type="text" name="Quantity" placeholder="Estimated Quantity">
-          </div>
-          <div class="input-box">
-            <label for="unit">&nbsp;</label>
-            <select id="unit" aria-label="Unit">
-              <option>Piece</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-box full">
-            <label for="requirement">Requirement Details</label>
-            <textarea id="requirement" name="requirementDeatail">I am interested. Kindly send the quotation for the same.</textarea>
-          </div>
-        </div>
-
-        <button class="submit" type="submit">Send Enquiry</button>
-      </form>
-
-      <!-- Explore more -->
-      <section style="margin-top:22px">
-        <h2 style="font-size:28px;color:var(--accent-2);margin-bottom:12px">Explore More Products</h2>
-        <div class="product-grid" id="moreProducts">
-          <% for (let allproduct of allproducts) { %>
-            <!-- <div class="product-card">
-              <img src="<%=allproduct.image%>" alt="<%=allproduct.title%>" loading="lazy">
-              
-              
-            </div> -->
-            <div class="gallery" aria-hidden="false"  role="article" aria-label="<%=allproduct.title%>">
-          <img id="mainImage" class="main-img" src="<%= allproduct.image %>" alt="<%= allproduct.title %> image" />
-          <h3> <%= (allproduct.title ? (allproduct.title.charAt(0).toUpperCase() + allproduct.title.slice(1)) : 'No description available.') %></h3>
-<a href="/showproductinfo/<%=allproduct._id%>" class="quote-btn">Get Best Quote</a>
-        </div>
-          <% } %>
-        </div>
-      </section>
+  <div class="row">
+    <div class="input-box full">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text"
+             class="form-control"
+             placeholder="Name" required>
+      <div class="invalid-feedback">Please enter your name</div>
     </div>
+
+    <div class="input-box">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email"
+             class="form-control" required>
+      <div class="invalid-feedback">Please enter a valid email</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-box full">
+      <label for="mobile">Mobile No.</label>
+
+      <div class="mobile-group">
+        <select aria-label="Country" class="form-select" style="max-width:90px">
+          <option value="IN">🇮🇳 India</option>
+        </select>
+
+        <span style="display:inline-block;padding:10px 8px;border:1px solid #e3e6ee;border-radius:8px;background:#fff">+91</span>
+
+        <input id="mobile" name="mobile" type="tel"
+               class="form-control"
+               pattern="[0-9]{10}"
+               placeholder="Enter Mobile No." required>
+
+        <div class="invalid-feedback">Enter 10 digit mobile number</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-box">
+      <label for="qty">Quantity</label>
+      <input id="qty" type="text" name="Quantity"
+             class="form-control"
+             placeholder="Estimated Quantity" required>
+      <div class="invalid-feedback">Please enter quantity</div>
+    </div>
+
+    <div class="input-box">
+      <label for="unit">&nbsp;</label>
+      <select id="unit" class="form-select" aria-label="Unit">
+        <option>Piece</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-box full">
+      <label for="requirement">Requirement Details</label>
+      <textarea id="requirement" name="requirementDeatail"
+                class="form-control"
+                required>I am interested. Kindly send the quotation for the same.</textarea>
+      <div class="invalid-feedback">Please describe your requirement</div>
+    </div>
+  </div>
+
+  <button class="submit btn btn-primary w-100 mt-2" type="submit">
+    Send Enquiry
+  </button>
+
+</form>
+
   </div>
 
   <script>
@@ -301,6 +301,20 @@
       alert('Please provide your phone number in the enquiry form and we will call you.');
       document.getElementById('mobile').focus();
     });
+    (() => {
+  'use strict'
+  const forms = document.querySelectorAll('.needs-validation')
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
   </script>
   <script type="application/ld+json">
 {
@@ -314,6 +328,7 @@
     "name": "LX Max Electricals"
   }
 }
+
 </script>
 
 </body>
